@@ -14,7 +14,12 @@
         <tbody>
             <tr v-for="(row, index) of rows" :key="row.id">
                 <td class="editable-cell" v-for="colContent of columns" :key="colContent.colKey">
-                    <render-data-cell v-bind:value=row[colContent.colKey] v-bind:edit="edit" />
+                    <render-data-cell
+                        v-bind:value=row[colContent.colKey]
+                        v-bind:editType=colContent.editType
+                        v-bind:cellParams="{rowIndex: index, colKey: colContent.colKey} "
+                        @change="edit"
+                    />
                 </td>
                 <td align="right">
                     <div class="btn-group" role="group">
@@ -38,7 +43,7 @@
 </template>
 
 <script>
-    import {remove, prepend} from "ramda";
+    import {remove, prepend, assocPath} from "ramda";
     import RenderDataCell from '../components/RenderDataCell'
     import {swapElementsInArray, copyToClipboard} from "../assets/utils/utils"
 
@@ -69,8 +74,17 @@
             save: function () {
                 console.log("send to server", this.rows);
             },
-            edit: function () {
-                console.log("edit");
+            edit: function (data) {
+                const {
+                    value,
+                    cellParams: {
+                        rowIndex,
+                        colKey
+                    }
+                } = data;
+                this.rows = assocPath([rowIndex, colKey], value, this.rows);
+                // TODO: почему-то не происходит перерендер
+                console.log(this.rows);
             },
             remove: function (index) {
                 this.rows = remove(index, 1, this.rows);
@@ -89,7 +103,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

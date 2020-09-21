@@ -3,17 +3,17 @@ export const dbStudents = {
         {
             title: "Имя",
             colKey: "name",
-            editType: "input"
+            editType: "text"
         },
         {
             title: "Фамилия",
             colKey: "surname",
-            editType: "input"
+            editType: "text"
         },
         {
             title: "Средний балл",
             colKey: "point",
-            editType: "select"
+            editType: "number"
         }
     ],
     list: [
@@ -21,29 +21,25 @@ export const dbStudents = {
             id: 1,
             name: "Василий",
             surname: "Первый",
-            point: 5,
-            classroom: 1
+            point: 5
         },
         {
             id: 2,
             name: "Константин",
             surname: "Второй",
-            point: 3,
-            classroom: 2
+            point: 3
         },
         {
             id: 3,
             name: "Илья",
             surname: "Третий",
-            point: 4,
-            classroom: 2
+            point: 4
         },
         {
             id: 4,
             name: "Сергей",
             surname: "Четвертый",
-            point: 4,
-            classroom: 2
+            point: 4
         }
     ]
 };

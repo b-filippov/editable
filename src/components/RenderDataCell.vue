@@ -5,7 +5,14 @@
             <img src="../assets/icons/edit.svg" />
         </button>
     </div>
-    <field-input-editor v-else :value=inputValue @changeField="closeEditor" />
+    <div v-else>
+        <field-input-editor
+            v-if="editType === 'text' || editType === 'number'"
+            :editType=editType
+            :value=inputValue
+            @change="closeEditor"
+        />
+    </div>
 </template>
 
 <script>
@@ -16,7 +23,8 @@
         components: {FieldInputEditor},
         props: {
             value: [String, Number],
-            edit: Function
+            cellParams: Object,
+            editType: String
         },
         data() {
             return {
@@ -29,8 +37,11 @@
                 this.isEdit = true;
             },
             closeEditor: function (data) {
-                console.log(data);
-                this.isEdit = true;
+                this.$emit('change', {
+                    value: data.value,
+                    cellParams: this.cellParams
+                });
+                this.isEdit = false;
             }
         }
     }

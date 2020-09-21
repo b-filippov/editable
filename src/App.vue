@@ -8,7 +8,8 @@
 </template>
 
 <script>
-  import {dbStudents} from "./assets/db_temp/db_students";
+  // import {dbStudents} from "./assets/db_temp/db_students";
+  import {dbInventory} from "./assets/db_temp/db_inventory";
   import EditableTable from './components/EditableTable'
 
   export default {
@@ -18,8 +19,8 @@
     },
     data() {
       return {
-        tableHeaderData: dbStudents.columns,
-        tableBodyData: dbStudents.list
+        tableHeaderData: dbInventory.columns,
+        tableBodyData: dbInventory.list
       }
     }
   }

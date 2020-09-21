@@ -1,7 +1,7 @@
 <template>
     <div class="input-group mb-3">
-        <input v-model="inputValue" v-on:onchange="changeField" type="text" class="form-control">
-        <button type="button" class="btn btn-success" >
+        <input v-model="inputValue" v-bind:type="editType" class="form-control">
+        <button type="button" class="btn btn-success" v-on:click="changeField">
             <img src="../assets/icons/check.svg" />
         </button>
     </div>
@@ -11,7 +11,8 @@
     export default {
         name: "FieldInputEditor",
         props: {
-            value: [String, Number]
+            value: [String, Number],
+            editType: String
         },
         data() {
             return {
@@ -27,7 +28,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>
