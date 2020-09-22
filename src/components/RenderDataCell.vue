@@ -1,6 +1,6 @@
 <template>
     <div v-if="!isEdit">
-        {{inputValue || "Не указано"}}
+        {{getValue(inputValue, editType)}}
         <button type="button" class="btn btn-primary btn-sm cell-event-button" v-on:click="openEditor" >
             <img src="../assets/icons/edit.svg" />
         </button>
@@ -12,19 +12,40 @@
             :value=inputValue
             @change="closeEditor"
         />
+        <field-select-editor
+            v-if="editType === 'select'"
+            :editType=editType
+            :value=inputValue
+            :variants=selectVariants
+            @change="closeEditor"
+        />
+        <field-checkbox-editor
+            v-if="editType === 'checkbox'"
+            :editType=editType
+            :value=inputValue
+            :variants=selectVariants
+            @change="closeEditor"
+        />
     </div>
 </template>
 
 <script>
     import FieldInputEditor from "./FieldInputEditor";
+    import FieldSelectEditor from "./FieldSelectEditor";
+    import FieldCheckboxEditor from "./FieldCheckboxEditor";
 
     export default {
         name: "RenderDataCell",
-        components: {FieldInputEditor},
+        components: {
+            FieldInputEditor,
+            FieldSelectEditor,
+            FieldCheckboxEditor
+        },
         props: {
             value: [String, Number],
             cellParams: Object,
-            editType: String
+            editType: String,
+            selectVariants: Array
         },
         data() {
             return {
@@ -33,6 +54,14 @@
             }
         },
         methods: {
+            getValue: function(value, editType) {
+                if(!value) return "Не указано";
+                if (editType === "select" || editType === "checkbox") {
+                    const currentVariant = this.selectVariants.find(item => item.value === value);
+                    return currentVariant.title;
+                }
+                return value;
+            },
             openEditor: function () {
                 this.isEdit = true;
             },

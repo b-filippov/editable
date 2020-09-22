@@ -32,7 +32,13 @@ export const dbInventory = {
         {
             title: "На складе",
             colKey: "warehouse",
-            editType: "checkbox"
+            editType: "checkbox",
+            selectVariants: [
+                {
+                    value: "",
+                    title: ""
+                }
+            ]
         }
     ],
     list: [
@@ -40,15 +46,15 @@ export const dbInventory = {
             id: 1,
             title: "Стул",
             count: 72,
-            condition: "Новое",
-            warehouse: "Да",
+            condition: "new",
+            warehouse: ""
         },
         {
-            id: 1,
+            id: 2,
             title: "Стол",
             count: 56,
-            condition: "Приемлемое",
-            warehouse: "Нет",
+            condition: "cancellation",
+            warehouse: ""
         }
     ]
 };
