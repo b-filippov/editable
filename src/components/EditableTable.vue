@@ -18,8 +18,13 @@
                         v-bind:value=row[colContent.colKey]
                         v-bind:editType=colContent.editType
                         v-bind:selectVariants=colContent.selectVariants
-                        v-bind:cellParams="{rowIndex: index, colKey: colContent.colKey} "
-                        @change="edit"
+                        @change="(data) => edit({
+                            ...data,
+                            cellParams: {
+                                rowIndex: index,
+                                colKey: colContent.colKey
+                            }
+                        })"
                     />
                 </td>
                 <td align="right">
@@ -83,10 +88,7 @@
                         colKey
                     }
                 } = data;
-
-                // TODO: почему-то не происходит перерендер с новыми данными
                 this.rows = assocPath([rowIndex, colKey], value, this.rows);
-                console.log(this.rows);
             },
             remove: function (index) {
                 this.rows = remove(index, 1, this.rows);

@@ -1,6 +1,6 @@
 <template>
     <div v-if="!isEdit">
-        {{getValue(inputValue, editType)}}
+        {{getValue(this.value, editType)}}
         <button type="button" class="btn btn-primary btn-sm cell-event-button" v-on:click="openEditor" >
             <img src="../assets/icons/edit.svg" />
         </button>
@@ -9,20 +9,20 @@
         <field-input-editor
             v-if="editType === 'text' || editType === 'number'"
             :editType=editType
-            :value=inputValue
+            :value=this.value
             @change="closeEditor"
         />
         <field-select-editor
             v-if="editType === 'select'"
             :editType=editType
-            :value=inputValue
+            :value=this.value
             :variants=selectVariants
             @change="closeEditor"
         />
         <field-checkbox-editor
             v-if="editType === 'checkbox'"
             :editType=editType
-            :value=inputValue
+            :value=this.value
             :variants=selectVariants
             @change="closeEditor"
         />
@@ -43,13 +43,11 @@
         },
         props: {
             value: [String, Number],
-            cellParams: Object,
             editType: String,
             selectVariants: Array
         },
         data() {
             return {
-                inputValue: this.value,
                 isEdit: false
             }
         },
@@ -67,8 +65,7 @@
             },
             closeEditor: function (data) {
                 this.$emit('change', {
-                    value: data.value,
-                    cellParams: this.cellParams
+                    value: data.value
                 });
                 this.isEdit = false;
             }
