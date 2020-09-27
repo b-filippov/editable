@@ -4,7 +4,7 @@
             <option v-for="(option, index) of variants" :key="index" :value="option.value">{{option.title}}</option>
         </select>
         <button type="button" class="btn btn-success" v-on:click="changeField">
-            <img src="../assets/icons/check.svg" />
+            <img src="../../../assets/icons/check.svg" />
         </button>
     </div>
 </template>

@@ -10,7 +10,7 @@
 <script>
   // import {dbStudents} from "./assets/db_temp/db_students";
   import {dbInventory} from "./assets/db_temp/db_inventory";
-  import EditableTable from './components/EditableTable'
+  import EditableTable from './components/EditableTable/index'
 
   export default {
     name: 'App',
